@@ -1,0 +1,6 @@
+# Database
+application/database/data.db
+
+# Node
+node_modules
+npm-debug.log
