@@ -30,7 +30,12 @@ class Articles extends CI_Controller {
 				$data['articles']   = $this->Model_articles->findTag($_GET['tag']);
 			} else if (isset($_GET['status'])) {
 				if ($_GET['status'] == 'published') {
+					// Articles publiés
+					$data['title_page'] = 'Articles publiés';
+					$data['articles'] = $this->Model_articles->findAllByState(1);
 				} else if ($_GET['status'] == 'draft') {
+					$data['title_page'] = 'Articles brouillons';
+					$data['articles'] = $this->Model_articles->findAllByState(0);
 				}
 			} else {
 				// Tous les articles
@@ -39,8 +44,7 @@ class Articles extends CI_Controller {
 			}
 
 			// Nombre d'articles de l'utilisateur connecté
-			$user = $this->Model_articles->findByUser($data['connected']['id']);
-			$data['number_articles'] = $user->num_rows();
+			$data['number_articles'] = $this->Model_articles->countFindByUser($data['connected']['id']);
 
 			$this->template->load($this->layout, 'admin/articles/view_articles', $data);
 		}

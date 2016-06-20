@@ -65,6 +65,15 @@ class Model_articles extends CI_Model {
 		return $this->db->get();
 	}
 
+	function findAllByState($state) {
+		$this->db->select('*')
+				 ->join('users', 'users.userId = ' . $this->table . '.userId')
+				 ->from($this->table)
+				 ->where('state', $state);
+
+		return $this->db->get();
+	}
+
 	// Tous les tags actives (sans tri)
 	function findTagActive($tag, $currentPage = '', $perPage = '')
 	{
@@ -125,6 +134,17 @@ class Model_articles extends CI_Model {
 				 ->order_by('articleId', 'desc');
 
 		return $this->db->get();
+	}
+	
+	function countFindByUser($id)
+	{
+		$this->db->select('articleId')
+				 ->from($this->table)
+				 ->join('users', 'users.userId = ' . $this->table . '.userId')
+				 ->where($this->table . '.userId', $id)
+				 ->order_by('articleId', 'desc');
+
+		return $this->db->count_all_results();
 	}
 
 	// Recherche

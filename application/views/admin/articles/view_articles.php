@@ -1,6 +1,6 @@
 <p>
 	<a class="btn btn-primary" href="<?= base_url('admin/articles/edit') ?>">Ajouter un article</a>
-	<?php if ($this->uri->segment(4) == $connected['id']): ?>
+	<?php if ($this->uri->segment(4) == $connected['id'] || isset($_GET['status']) ): ?>
 		<a class="btn" href="<?= base_url('admin/articles') ?>">Tous les articles</a>
 	<?php else: ?>
 		<?php if ($number_articles > 0): ?>
@@ -9,7 +9,7 @@
 	<?php endif; ?>
 </p>
 
-<?php if ($articles->num_rows() > 0): ?>
+<?php if (isset($articles) && $articles->num_rows() > 0): ?>
 <table class="table table-hover">
 	<tr>
 		<th>#</th>
