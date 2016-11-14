@@ -30,6 +30,9 @@
 					<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'articles'):?>class="active"<?php endif; ?>>
 						<a href="<?= base_url('admin') ?>">Articles</a>
 					</li>
+					<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'pages'):?>class="active"<?php endif; ?>>
+						<a href="<?= base_url('admin/pages') ?>">Pages</a>
+					</li>
 					<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'users'):?>class="active"<?php endif; ?>>
 						<a href="<?= base_url('admin/users') ?>">Utilisateurs</a>
 					</li>
@@ -77,7 +80,7 @@
 
 	<?= $contents ?>
 
-	<footer>
+	<footer class="col-md-12">
 		<p class="text-center">
 			BlogLite propulsé par CodeIgniter <?= CI_VERSION ?> et SQLite 3 
 			<?php if (isset($connected)): ?>

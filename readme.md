@@ -18,11 +18,12 @@ Gulp nécessite NodeJS, NPM et PHP installés sur votre machine (`node -v && npm
 2. Installez les dépendances présentes dans le fichier "package.json" avec `npm install` ;
 3. Lancez le serveur avec `gulp`.
 
+
 ## Ingrédients
 
 - CodeIgniter 3, framework PHP 5 MVC ;
 - SQLite 3, base de données ;
-- Foundation 6, framework CSS (utilisé coté front) : ;
+- Foundation 6, framework CSS (utilisé coté front) : [http://foundation.zurb.com/sites/docs](http://foundation.zurb.com/sites/docs) ;
 - Bootstrap 3, framework CSS (utilisé coté back) : [http://getboostrap.com](http://getboostrap.com) ;
 - "ci-markdown", parseur Markdown : [https://github.com/jonlabelle/ci-markdown](https://github.com/jonlabelle/ci-markdown) ;
 - "simple MDE", editeur Markdown : [https://simplemde.com](https://simplemde.com).
@@ -34,8 +35,10 @@ Par défaut, l'API n'est pas publique (il faut être connecté au back office). 
 
 ### Articles
 
-GET Tous les articles [http://localhost/admin/api/articles](http://localhost/admin/api/articles)
-GET Un article [http://localhost/admin/api/articles/1](http://localhost/admin/api/articles/1)
+| Verb | URL | Description |
+| ---- | --- | ----------- |
+| GET | /admin/api/articles | Tous les articles |
+| GET | /admin/api/articles/1 | Un article |
 
 
 ## Todolist

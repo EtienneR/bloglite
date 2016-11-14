@@ -25,11 +25,18 @@ $route['admin/articles/edit/(:any)']   = 'admin/articles/edit/$1';
 $route['admin/articles/delete/(:num)'] = 'admin/articles/delete/$1';
 $route['admin/articles/user/(:num)']   = 'admin/articles/user/$1';
 
+## Pages
+$route['admin/pages']			    = 'admin/pages';
+$route['admin/pages/edit']		    = 'admin/pages/edit';
+$route['admin/pages/edit/(:any)']   = 'admin/pages/edit/$1';
+$route['admin/pages/delete/(:num)'] = 'admin/pages/delete/$1';
+
 ## Config
 $route['admin/config'] = 'admin/config';
 $route['admin/about']  = 'admin/config/about';
 
 ## API
+$route['admin/api'] 				= 'admin/api';
 $route['admin/api/articles'] 		= 'admin/api/fetchArticles';
 $route['admin/api/articles/(:num)'] = 'admin/api/fetchOne/$1';
 

@@ -1,1 +1,1 @@
-{"name_site":"Bloglite","description":"Ici la description de mon blog \/ site.","email":"email@monblog.com","pagination":6,"slugs_reserved":"admin, contact, feed, page, archives"}
+{"name_site":"Bloglite","description":"Ici la description de mon blog \/ site.","email":"email@monblog.com","pagination":6,"slugs_reserved":"admin, contact, feed, page, archives, api"}

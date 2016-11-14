@@ -13,6 +13,7 @@ class Model_articles extends CI_Model {
 	{
 		$this->db->select('articleId, title, content, slug, cdate, state, tags, users.userId, users.name')
 				 ->from($this->table)
+				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId');
 
 		if ($strict && $strict == TRUE) {
@@ -35,6 +36,7 @@ class Model_articles extends CI_Model {
 	{
 		$this->db->select('articleId, title, content, slug, cdate, state, tags, users.userId, users.name')
 				 ->from($this->table)
+				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
 				 ->where('articleId', $id)
 				 ->limit(1);
@@ -69,7 +71,9 @@ class Model_articles extends CI_Model {
 		$this->db->select('*')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
 				 ->from($this->table)
-				 ->where('state', $state);
+				 ->where('type', 'article')
+				 ->where('state', $state)
+				 ->order_by('articleId', 'desc');
 
 		return $this->db->get();
 	}
@@ -105,6 +109,7 @@ class Model_articles extends CI_Model {
 	{
 		$this->db->select('articleId, title, slug')
 				 ->from($this->table)
+				 ->where('type', 'article')
 				 ->where('slug <>', $slug)
 				 ->where('state', 1)
 				 ->order_by('articleId', 'desc');
@@ -130,6 +135,7 @@ class Model_articles extends CI_Model {
 		$this->db->select('*')
 				 ->from($this->table)
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
+				 ->where('type', 'article')
 				 ->where($this->table . '.userId', $id)
 				 ->order_by('articleId', 'desc');
 
@@ -141,6 +147,7 @@ class Model_articles extends CI_Model {
 		$this->db->select('articleId')
 				 ->from($this->table)
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
+				 ->where('type', 'article')
 				 ->where($this->table . '.userId', $id)
 				 ->order_by('articleId', 'desc');
 

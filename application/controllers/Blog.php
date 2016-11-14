@@ -129,6 +129,7 @@ class Blog extends CI_Controller {
 			$data['description'] = strip_tags(character_limiter($this->markdown->parse($data['content']), 256));
 			$data['tags']		 = $article->row()->tags;
 			$data['cdate']		 = $article->row()->cdate;
+			$data['type']		 = $article->row()->type;
 			$data['title_page']  = $data['title'] . ' - ' . $this->title_page;
 
 			// Chargement des autres articles

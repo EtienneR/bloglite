@@ -85,42 +85,100 @@
 <h1 class="text-center">Aucun article</h1>
 <?php endif; ?>
 
-<!-- <div ng-app="articlesApp">
-	<div ng-controller="ArticlesListCtrl">
-		<table class="table table-hover">
-			<tr>
-				<th>#</th>
-				<th>Titre</th>
-				<th>Contenu</th>
-				<th>Statut</th>
-				<th>Tags</th>
-				<th>Auteur</th>
-				<th></th>
-				<th></th>
-				<th></th>
-			</tr>
-			<tr ng-repeat="article in articles">
-				<td>{{article.articleId}}</td>
-				<td><a href="articles/edit/{{article.articleId}}" title="Modifier cet article">{{article.title}}</td>
-				<td>{{article.content | limitTo : 128}}</td>
-				<td>{{article.state}}</td>
-				<td><a href="articles?tag={{article.tags}}">{{article.tags}}</td>
-				<td>{{article.name}}</td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</table>
-	</div>
+<!-- <div id="app">
+
+	<table class="table table-hover">
+		<tr>
+			<th>#</th>
+			<th>Titre</th>
+			<th>Statut</th>
+			<th>Tags</th>
+			<th>Auteur</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr v-for="article in articles">
+			<td>{{ article.articleId }}</td>
+			<td>
+				<a href="../admin/articles/edit/{{article.articleId}}" title="Modifier cet article">
+					{{ article.title }}
+				</a>
+			</td>
+			<td>
+				<div v-if="article.state == 0">
+					<a href="../admin/articles?status=draft">
+						<span class="label label-warning">Brouillon</span>
+					</a>
+				</div>
+				<div v-else>
+					<a href="../admin/articles?status=published">
+						<span class="label label-info">Publié</span>
+					</a>
+				</div>
+			</td>
+			<td>
+				<a href="articles?tag={{ article.tags }}">
+					{{ article.tags | split }}
+				</a>
+				<span v-for="tag in tags">
+					{{tag}}
+				</span>
+			</td>
+			<td>
+				<a href="../admin/articles/user/{{ article.userId }}">
+					{{ article.name }}
+				</a>
+			</td>
+			<td class="text-center">
+				<a href="../admin/articles/edit/{{ article.articleId }}" title="Modifier cet article">
+					<i class="glyphicon glyphicon-pencil"></i>
+				</a>
+			</td>
+			<td class="text-center">
+				<a href="../admin/articles/delete/{{ article.articleId }}" title="Supprimer cet article">
+					<i class="glyphicon glyphicon-trash"></i>
+				</a>
+			</td>
+		</tr>
+	</table>
+	<p class="text-right">
+		{{articles.length}} articles
+	</p>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+<script src="http://vuejs.org/js/vue.min.js"></script>
 <script>
-	var articlesApp = angular.module('articlesApp', []);
+var app = new Vue({
+  el: '#app',
 
-	articlesApp.controller('ArticlesListCtrl', function ($scope, $http) {
-  		$http.get('http://localhost/admin/api/articles').success(function(data) {
-    		$scope.articles = data;
-  		});
-	});
+  data: {
+     articles: null,
+     tags: ['fraise', 'banane', 'citron']
+  },
+
+  ready: function () {
+    this.getArticles();
+  },
+
+  methods: {
+    getArticles: function () {
+      var xhr = new XMLHttpRequest();
+      var self = this;
+      xhr.open('GET', '../admin/api/articles');
+      xhr.onload = function () {
+          self.articles = JSON.parse(xhr.responseText);
+      }
+      xhr.send();
+    }
+  }
+})
+
+Vue.filter('split', function (value) {
+	return value.split(";").join(' ')
+})
+
+var fruits_str   = "Fraise;Citron;Banane";
+var fruits_array = fruits_str.split(";");
+console.log(fruits_array);
+
 </script> -->

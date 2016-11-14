@@ -78,9 +78,6 @@ class Users extends CI_Controller {
 		// Aucun utilisateur dans la BDD
 		if ($this->Model_users->findAll()->num_rows() == 0) {
 			redirect('users/signup');
-			//echo 'que dalle';
-			//$this->signUp();
-			//echo 'Inscription';
 		} else {
 			$data['title_page'] = 'Connexion';
 

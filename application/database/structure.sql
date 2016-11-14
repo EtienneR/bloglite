@@ -15,5 +15,6 @@ CREATE TABLE articles(
 	cdate TEXT NOT NULL, 
 	state INTEGER NOT NULL, 
 	tags TEXT,
+	type TEXT,
 	FOREIGN KEY(userId) REFERENCES users(userId)
 );
