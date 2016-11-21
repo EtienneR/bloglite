@@ -37,6 +37,10 @@
 			<?= form_input($title); ?>
 		</div>
 
+		<div class="form-group col-md-4">
+			<?= form_label('Tag(s) (séparés par un point virgule)', 'tags'); ?>
+			<?= form_input($tags); ?>
+		</div>
 
 		<?php if (isset($id)): ?>
 		<div class="form-group col-md-4">

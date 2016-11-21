@@ -46,6 +46,7 @@ class Pages extends CI_Controller {
 			$title	 = $this->input->post('title');
 			$content = $this->input->post('content');
 			$state	 = $this->input->post('state');
+			$tags	 = $this->input->post('tags');
 
 			if (!empty($id)) {
 				
@@ -64,6 +65,7 @@ class Pages extends CI_Controller {
 					$data['slug']		= $article->row()->slug;
 					$data['state']		= $article->row()->state;
 					$data['cdate']		= $article->row()->cdate;
+					$data['tags']		= $article->row()->tags;
 
 					$data['slug'] = array(
 									'class' => 'form-control',
@@ -79,6 +81,7 @@ class Pages extends CI_Controller {
 
 					$this->form_validation->set_rules('title', 'Title', 'required|trim|min_length[2]' . $unique_title);
 					$this->form_validation->set_rules('slug', 'slug', 'required|trim|min_length[2]|is_unique[articles.title]|callback__reservedSlug');
+					$this->form_validation->set_rules('tags', 'tags', 'trim');
 
 					// Formulaire OK
 					if ($this->form_validation->run() !== FALSE) {
@@ -146,6 +149,13 @@ class Pages extends CI_Controller {
 							'name'  => 'content',
 							'id'    => 'content',
 							'value' => isset($data['content'])?$data['content']:set_value('content'));
+
+			$data['tags'] = array(
+							'class' => 'form-control',
+							'name'  => 'tags',
+							'id'    => 'tags',
+							'value' => isset($data['tags'])?$data['tags']:set_value('tags'));
+
 
 			$data['submit'] = array(
 							'class' => 'btn btn-primary',
