@@ -30,26 +30,41 @@
 	</div>
 	<?php endforeach; ?>
 
-	<div class="row">
+		<div class="row">
 
-		<div class="form-group col-md-4">
-			<?= form_label('Titre', 'title'); ?>
-			<?= form_input($title); ?>
+			<div class="form-group col-md-4">
+				<?= form_label('Titre', 'title'); ?>
+				<?= form_input($title); ?>
+			</div>
+
+			<div class="form-group col-md-4">
+				<?= form_label('Tag(s) (séparés par un point virgule)', 'tags'); ?>
+				<?= form_input($tags); ?>
+			</div>
+
+			<?php if (isset($id)): ?>
+			<div class="form-group col-md-4">
+				<?= form_label('Slug', 'slug'); ?>
+				<?= form_input($slug); ?>
+			</div>
+			<?php endif; ?>
+
 		</div>
 
-		<div class="form-group col-md-4">
-			<?= form_label('Tag(s) (séparés par un point virgule)', 'tags'); ?>
-			<?= form_input($tags); ?>
+		<div class="row">
+
+			<div class="form-group col-md-4">
+				<?= form_label('Démo', 'demo'); ?>
+				<?= form_input($demo); ?>
+			</div>
+
+			<div class="form-group col-md-4">
+				<?= form_label('Download', 'download'); ?>
+				<?= form_input($download); ?>
+			</div>
+
 		</div>
 
-		<?php if (isset($id)): ?>
-		<div class="form-group col-md-4">
-			<?= form_label('Slug', 'slug'); ?>
-			<?= form_input($slug); ?>
-		</div>
-		<?php endif; ?>
-
-	</div>
 
 	<div class="form-group">
 		<?= form_label('Content', 'content'); ?>

@@ -34,7 +34,7 @@ class Model_articles extends CI_Model {
 	// Un article
 	function find($id)
 	{
-		$this->db->select('articleId, title, content, slug, cdate, state, tags, users.userId, users.name')
+		$this->db->select('articleId, title, content, slug, cdate, state, tags, demo, download, users.userId, users.name')
 				 ->from($this->table)
 				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
@@ -174,16 +174,19 @@ class Model_articles extends CI_Model {
 	}
 
 	// Insertion d'un article
-	function insert($title, $content, $state, $slug, $cdate, $tags, $user_id)
+	function insert($title, $content, $state, $slug, $cdate, $tags, $demo, $download, $user_id)
 	{
 		$data = array(
-			'title'   => $title,
-			'content' => $content,
-			'state'	  => $state,
-			'slug'    => $slug,
-			'cdate'   => $cdate,
-			'tags'    => $tags,
-			'userId'  => $user_id
+			'title'    => $title,
+			'content'  => $content,
+			'state'	   => $state,
+			'slug'     => $slug,
+			'cdate'    => $cdate,
+			'tags'     => $tags,
+			'type'     => 'article',
+			'demo'     => $demo,
+			'download' => $download,
+			'userId'   => $user_id
 		);
 
 		$this->db->insert($this->table, $data);
@@ -200,13 +203,15 @@ class Model_articles extends CI_Model {
 	}
 
 	// Modification d'un article
-	function update($title, $content, $state, $tags, $id)
+	function update($title, $content, $state, $tags, $demo, $download, $id)
 	{
 		$data = array(
-			'title'   => $title,
-			'content' => $content,
-			'state'	  => $state,
-			'tags'	  => $tags
+			'title'    => $title,
+			'content'  => $content,
+			'state'	   => $state,
+			'tags'	   => $tags,
+			'demo'	   => $demo,
+			'download' => $download
 		);
 
 		$this->db->where('articleId', $id);

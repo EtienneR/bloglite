@@ -63,10 +63,12 @@ class Articles extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<div class="alert alert-warning" role="alert">', '</div>');
 
 			// Stockage des valeurs
-			$title	 = $this->input->post('title');
-			$content = $this->input->post('content');
-			$state	 = $this->input->post('state');
-			$tags	 = $this->input->post('tags');
+			$title	  = $this->input->post('title');
+			$content  = $this->input->post('content');
+			$state	  = $this->input->post('state');
+			$tags	  = $this->input->post('tags');
+			$demo	  = $this->input->post('demo');
+			$download = $this->input->post('download');
 
 			if (!empty($id)) {
 				
@@ -86,6 +88,8 @@ class Articles extends CI_Controller {
 					$data['state']		= $article->row()->state;
 					$data['cdate']		= $article->row()->cdate;
 					$data['tags']		= $article->row()->tags;
+					$data['demo']		= $article->row()->demo;
+					$data['download']	= $article->row()->download;
 
 					$data['slug'] = array(
 									'class' => 'form-control',
@@ -101,14 +105,16 @@ class Articles extends CI_Controller {
 
 					$this->form_validation->set_rules('title', 'Title', 'required|trim|min_length[2]' . $unique_title);
 					$this->form_validation->set_rules('slug', 'slug', 'required|trim|min_length[2]|is_unique[articles.title]|callback__reservedSlug');
+					$this->form_validation->set_rules('demo', 'demo', 'trim');
+					$this->form_validation->set_rules('download', 'download', 'trim');
 
 					// Formulaire OK
 					if ($this->form_validation->run() !== FALSE) {
-						if ($title == $data['title'] && $content == $data['content'] && $state == $data['state'] && $tags == $data['tags']) {
+						if ($title == $data['title'] && $content == $data['content'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
 							$this->session->set_flashdata('warning', 'Aucune modification à prendre en compte.');
 						} else {
 							// Modification en BDD
-							$this->Model_articles->update($title, $content, $state, $tags, $id);
+							$this->Model_articles->update($title, $content, $state, $tags, $demo, $download, $id);
 							$this->session->set_flashdata('success', 'Article "' . $title . '" modifié.');
 						}
 						redirect(base_url($this->url));
@@ -149,7 +155,7 @@ class Articles extends CI_Controller {
 						// Création de la date du post
 						$cdate = date(DATE_ISO8601, time());
 
-						$this->Model_articles->insert($title, $content, $state, $slug, $cdate, $tags, $data['connected']['id']);
+						$this->Model_articles->insert($title, $content, $state, $slug, $cdate, $tags, $demo, $download, $data['connected']['id']);
 						$this->session->set_flashdata('success', 'Article "' . $title . '" créé.');
 						redirect(base_url($this->url));
 					}
@@ -174,6 +180,18 @@ class Articles extends CI_Controller {
 							'name'  => 'tags',
 							'id'    => 'tags',
 							'value' => isset($data['tags'])?$data['tags']:set_value('tags'));
+
+			$data['demo'] = array(
+							'class' => 'form-control',
+							'name'  => 'demo',
+							'id'    => 'demo',
+							'value' => isset($data['demo'])?$data['demo']:set_value('demo'));
+
+			$data['download'] = array(
+							'class' => 'form-control',
+							'name'  => 'download',
+							'id'    => 'download',
+							'value' => isset($data['download'])?$data['download']:set_value('download'));
 
 			$data['submit'] = array(
 							'class' => 'btn btn-primary',
