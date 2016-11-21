@@ -6,8 +6,16 @@
 
 <article>
 	<h1 class="text-center"><?= $title ?></h1>
+	<div class="text-center">
+	<?php if (isset($demo)): ?>
+		<a href="<?= $demo ?>" target="_blank" class="success button">Démo</a>
+	<?php endif; ?>
+	<?php if (isset($download)): ?>
+		<a href="<?= $download ?>" target="_blank" class="button">Télécharger</a>
+	<?php endif; ?>
+	</div>
 	<?php if ($type == 'article'): ?>
-	<?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?>
+	<p><?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?></p>
 	<?php endif; ?>
 	<?= getTags($tags); ?>
 	<?= $this->markdown->parse($content) ?>

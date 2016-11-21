@@ -10,16 +10,12 @@ class Blog extends CI_Controller {
 		$this->load->library(array('markdown', 'Template', 'Tags'));
 		$this->load->model('Model_articles');
 		$this->title_page = getConfig()->name_site;
-		//$this->output->enable_profiler(TRUE);
+		$this->output->enable_profiler(TRUE);
 	}
 
 	// Home
 	public function index($currentPage = 0)
 	{
-/*		$db = new SQLite3('mysqlitedb.db');
-		$sql = file_get_contents(APPPATH . '/database/structure.sql');
-		$db->exec($sql);*/
-
 		// Chargement de la librairie de pagination
 		$this->load->library('pagination');
 
@@ -130,6 +126,8 @@ class Blog extends CI_Controller {
 			$data['tags']		 = $article->row()->tags;
 			$data['cdate']		 = $article->row()->cdate;
 			$data['type']		 = $article->row()->type;
+			$data['demo']		 = $article->row()->demo;
+			$data['download']	 = $article->row()->download;
 			$data['title_page']  = $data['title'] . ' - ' . $this->title_page;
 
 			// Chargement des autres articles
