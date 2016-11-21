@@ -130,7 +130,7 @@ class Pages extends CI_Controller {
 						// Création de la date du post
 						$cdate = date(DATE_ISO8601, time());
 
-						$this->Model_pages->insert($title, $content, $state, $slug, $cdate, $data['connected']['id']);
+						$this->Model_pages->insert($title, $content, $state, $slug, $tags, $data['connected']['id']);
 						$this->session->set_flashdata('success', 'Article "' . $title . '" créé.');
 						redirect(base_url($this->url));
 					}
