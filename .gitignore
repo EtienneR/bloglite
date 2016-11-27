@@ -1,5 +1,6 @@
 # Database
 application/database/data.db
+application/database/slugs_redirections.json
 
 # Node
 node_modules

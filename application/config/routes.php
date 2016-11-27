@@ -5,7 +5,6 @@ $route['default_controller'] = 'blog';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-
 # Admin
 $route['admin']	= 'admin/users/signIn';
 
@@ -40,7 +39,6 @@ $route['admin/api'] 				= 'admin/api';
 $route['admin/api/articles'] 		= 'admin/api/fetchArticles';
 $route['admin/api/articles/(:num)'] = 'admin/api/fetchOne/$1';
 
-
 # Front
 ## Archives
 $route['archives'] = $route['default_controller'] . '/archives';
@@ -57,6 +55,9 @@ $route['page/(:num)'] = $route['default_controller'] . '/index/$1';
 
 ## Flux RSS
 $route['feed'] = $route['default_controller'] . '/feed';
+
+# Anciennes routes (SEO) --- NE PAS DEPLACER ---
+$route['(:any)/(:any)']  = 'redirections/index/$1/$2';
 
 ## Articles
 $route['(:any)'] = $route['default_controller'] . '/article/$1';
