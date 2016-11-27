@@ -41,6 +41,29 @@ Par défaut, l'API n'est pas publique (il faut être connecté au back office). 
 | GET | /admin/api/articles/1 | Un article |
 
 
+## Fonctionnalités présentes
+
+### Front
+
+- Lister les articles ;
+- Lister par tags ;
+- Afficher un article ;
+- Formulaire de contact ;
+- Feed RSS ;
+- Moteur de recherche.
+
+### Back office
+- Ajouter / modifier / supprimer un article ;
+- Ajouter / modifier / supprimer une page ;
+- Ajouter / modifier / supprimer un utilisateur ;
+- Configurer le blog pour :
+    - titre du site ;
+    - email de contact ;
+    - réglage de la pagination (nombre d'articles par page) ;
+    - description du site ;
+    - slug reservés ;
+- L'utilisateur peut éditer son profile et réinitialiser son mot de passe ;
+
 ## Todolist
 
 > Un site n'est jamais fini...
