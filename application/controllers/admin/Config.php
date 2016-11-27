@@ -61,6 +61,7 @@ class Config extends CI_Controller {
 						'name'  => 'pagination',
 						'id'    => 'pagination',
 						'type'  => 'number',
+						'min'   => 1,
 						'value' => isset($config->pagination)?$config->pagination:set_value('pagination'));
 
 			$data['slugs_reserved'] = array(
