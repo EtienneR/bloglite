@@ -1,4 +1,5 @@
 <?= form_open() ?>
+
 	<div class="row">
 		<div class="col-md-6">
 			<?= form_submit($submit) ?>
@@ -38,7 +39,7 @@
 			</div>
 
 			<div class="form-group col-md-4">
-				<?= form_label('Tag(s) (séparés par un point virgule)', 'tags'); ?>
+				<?= form_label('Tag(s) (séparés par une virgule)', 'tags'); ?>
 				<?= form_input($tags); ?>
 			</div>
 
@@ -74,3 +75,19 @@
 	<?= form_submit($submit) ?>
 
 <?= form_close() ?>
+
+<script>
+$('#tags').tokenfield({
+  autocomplete: {
+    source: [<?php foreach (array_unique($tagInArray) as $row) {
+				if ($row === end($tagInArray)) {
+					echo "'" . $row . "'";
+				} else {
+					echo "'" . $row . "',";
+				}
+			} ?>],
+    delay: 0
+  },
+  showAutocompleteOnFocus: true
+});
+</script>

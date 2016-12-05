@@ -13,7 +13,7 @@
 		</h2>
 		<p>
 			<?= date_fr(nice_date($article->cdate, 'd'), nice_date($article->cdate, 'm'), nice_date($article->cdate, 'Y')); ?>
-			<?= getTags($article->tags); ?>
+			<?= getTags($article->tags, 'listing'); ?>
 		</p>
 		<p><?= strip_tags(character_limiter($this->markdown->parse($article->content), 180)) ?></p>
 

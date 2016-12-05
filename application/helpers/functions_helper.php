@@ -19,14 +19,26 @@ if ( ! function_exists('js_url'))
 
 if ( ! function_exists('getTags'))
 {
-	function getTags($tags)
+	function getTags($tags, $option)
 	{
 		if (isset($tags) && !empty($tags)) {
-			echo '- ';
-			$tags = explode(';', $tags);
+			if ($option == 'listing' || $option == 'article') {
+				$url = 'tag/';
+			}
+
+			if ($option == 'listing') {
+				echo '- ';
+			}
+
+			if ($option == 'admin') {
+				$url = 'admin/articles?tag=';
+			}
+
+			$tags = explode(',', $tags);
+
 			foreach ($tags as $tag) {
 				if (!empty($tag)) {
-					echo '<a href="' . base_url('tag/' . $tag) . '">' . $tag . '</a> ';
+					echo '<a href="' . base_url($url . $tag) . '">' . $tag . '</a> ';
 				}
 			}
 		}

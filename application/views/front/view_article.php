@@ -17,7 +17,7 @@
 	<?php if ($type == 'article'): ?>
 	<p><?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?></p>
 	<?php endif; ?>
-	<?= getTags($tags); ?>
+	<?= getTags($tags, 'article'); ?>
 	<?= $this->markdown->parse($content) ?>
 </article>
 

@@ -99,7 +99,8 @@ class Model_articles extends CI_Model {
 	{
 		$this->db->select('tags')
 				 ->from($this->table)
-				 ->where('state', 1);
+				 ->where('state', 1)
+				 ->where('type', 'article');
 
 		return $this->db->get();
 	}
@@ -172,6 +173,18 @@ class Model_articles extends CI_Model {
 
 		return $this->db->get();
 	}
+
+	// Tous les tags
+	function getAllTags()
+	{
+		$this->db->distinct()
+				 ->select('tags')
+				 ->from($this->table)
+				 ->order_by('tags', 'asc');
+
+		return $this->db->get();
+	}
+
 
 	// Insertion d'un article
 	function insert($title, $content, $state, $slug, $cdate, $tags, $demo, $download, $user_id)

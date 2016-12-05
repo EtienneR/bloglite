@@ -2,6 +2,7 @@
 
 class Tags {
 
+	// Retourne la liste des tags utilisés dans les articles publiés
 	public function tagsList() 
 	{
 		$CI =& get_instance();
@@ -10,12 +11,12 @@ class Tags {
 		if ($tags->num_rows() > 0) {
 			foreach ($tags->result_array() as $tag) {
 				if (!empty(current($tag))) {
-					$tags_str[] = implode('', $tag);
+					$tags_str[] = implode(',', $tag);
 				}
 			}
 
-			$implode = implode('', $tags_str);
-			$explode = explode(';', $implode);
+			$implode = implode(',', $tags_str);
+			$explode = explode(',', $implode);
 
 			return array_unique($explode);
 		}

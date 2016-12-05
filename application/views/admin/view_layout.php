@@ -7,6 +7,13 @@
 	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
 	<?= css_url('simplemde.min') ?>
 	<?php endif; ?>
+	<?= css_url('bootstrap-tokenfield.min') ?>
+	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
+
+	<?= js_url('jquery-2.2.0.min') ?>
+	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+	<?= js_url('bootstrap.min') ?>
+	<?= js_url('bootstrap-tokenfield.min') ?>
 </head>
 <body class="container-fluid">
 
@@ -89,8 +96,7 @@
 		</p>
 	</footer>
 
-	<?= js_url('jquery-2.2.0.min') ?>
-	<?= js_url('bootstrap.min') ?>
+
 	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
 	<?= js_url('simplemde.min') ?>
 	<script>
@@ -99,5 +105,4 @@
 	<?php endif; ?>
 
 </body>
-
 </html>

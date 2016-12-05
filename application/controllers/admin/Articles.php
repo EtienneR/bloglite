@@ -56,6 +56,25 @@ class Articles extends CI_Controller {
 		if ($this->functions->getLoged()) {
 			$data['connected'] = $this->functions->getUser();
 
+			// Récupération de la liste des tags
+			$tag_list = $this->Model_articles->getAllTags();
+
+			// Récupération des tags dans un tableau
+			foreach ($tag_list->result_array() as $row) {
+				$allTags[] = $row['tags'];
+			}
+
+			// Récupération des tags séparés dans une chaine de caractères
+			$tagsInString = implode(',', $allTags);
+			// Récupération des tags séparés dans tableau
+			$data['tagInArray']  = explode(',', $tagsInString);
+			// Récupération dans une chaine de caractères + suppression des doublons dans le tableau
+			//$data['tagsList'] = implode(',', array_unique($tagInArray));
+
+
+
+			//echo ($data['tagsList']);
+
 			// Règles de chaque champs
 			$this->form_validation->set_rules('content', 'Content', 'required|trim');
 
@@ -110,6 +129,8 @@ class Articles extends CI_Controller {
 
 					// Formulaire OK
 					if ($this->form_validation->run() !== FALSE) {
+						$tags = str_replace(' ', '', $tags);
+
 						if ($title == $data['title'] && $content == $data['content'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
 							$this->session->set_flashdata('warning', 'Aucune modification à prendre en compte.');
 						} else {
@@ -117,6 +138,7 @@ class Articles extends CI_Controller {
 							$this->Model_articles->update($title, $content, $state, $tags, $demo, $download, $id);
 							$this->session->set_flashdata('success', 'Article "' . $title . '" modifié.');
 						}
+
 						redirect(base_url($this->url));
 					}
 
