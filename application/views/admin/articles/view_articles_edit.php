@@ -79,7 +79,7 @@
 <script>
 $('#tags').tokenfield({
   autocomplete: {
-    source: [<?php foreach (array_unique($tagInArray) as $row) {
+    source: [<?php sort($tagInArray); foreach (array_unique($tagInArray) as $row) {
 				if ($row === end($tagInArray)) {
 					echo "'" . $row . "'";
 				} else {

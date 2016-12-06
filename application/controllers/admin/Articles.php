@@ -68,12 +68,6 @@ class Articles extends CI_Controller {
 			$tagsInString = implode(',', $allTags);
 			// Récupération des tags séparés dans tableau
 			$data['tagInArray']  = explode(',', $tagsInString);
-			// Récupération dans une chaine de caractères + suppression des doublons dans le tableau
-			//$data['tagsList'] = implode(',', array_unique($tagInArray));
-
-
-
-			//echo ($data['tagsList']);
 
 			// Règles de chaque champs
 			$this->form_validation->set_rules('content', 'Content', 'required|trim');
