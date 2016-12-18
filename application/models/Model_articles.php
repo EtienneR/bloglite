@@ -22,7 +22,7 @@ class Model_articles extends CI_Model {
 
 		if ($published && $published == TRUE) {
 			// Afficher les articles non publiés
-			$this->db->where('pdate <=', unix_to_human(now(), TRUE, 'eu') );
+			$this->db->where('pdate <=', date(DATE_ISO8601, time()));
 		}
 
 		$this->db->order_by('articleId', 'desc');
