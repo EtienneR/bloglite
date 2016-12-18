@@ -89,7 +89,8 @@ class Model_articles extends CI_Model {
 		$this->db->select('*')
 				 ->from($this->table)
 				 ->like('tags', $tag)
-				 ->where('state', 1);
+				 ->where('state', 1)
+				 ->where('pdate <=', date(DATE_ISO8601, time()));
 
 		if ($currentPage && $perPage) {
 			$this->db->limit($perPage, ($currentPage-1) * $perPage);
@@ -105,6 +106,7 @@ class Model_articles extends CI_Model {
 		$this->db->select('tags')
 				 ->from($this->table)
 				 ->where('state', 1)
+				 ->where('pdate <=', date(DATE_ISO8601, time()))
 				 ->where('type', 'article');
 
 		return $this->db->get();
@@ -168,6 +170,7 @@ class Model_articles extends CI_Model {
 				 ->like('content', $word)
 				 ->or_like('title', $word)
 				 ->where('state', 1)
+				 ->where('pdate <=', date(DATE_ISO8601, time()))
 				 ->order_by('articleId', 'desc');
 
 		if ($currentPage && $perPage) {
