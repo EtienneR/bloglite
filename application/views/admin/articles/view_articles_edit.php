@@ -66,7 +66,7 @@
 					<?= form_input($tags); ?>
 				</div>
 
-				<datalist id="languages">
+				<datalist id="tagsList">
 					<?php foreach (array_unique($tagInArray) as $tag): ?>
 						<option value="<?= $tag ?>"><?= $tag; ?></option>
 					<?php endforeach; ?>

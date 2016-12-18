@@ -259,13 +259,17 @@ class Articles extends CI_Controller {
 		if ($this->functions->getLoged()) {
 			$article = $this->Model_articles->find($id);
 
-			// Vérification de l'article à supprimer
-			if ($article->num_rows() == 1) {
-				$this->session->set_flashdata('success', 'Article "' . $article->row()->title . '" supprimé');
-				// Suppression de l'article
-				$this->Model_articles->delete($id);
+			if ($this->functions->getUserLevel() !== 0 && ($this->functions->getUserId() !== $article->row()->userId)) {
+				$this->session->set_flashdata('warning', 'Vous n\'avez pas les droits requis pour supprimer cet article');
 			} else {
-				$this->session->set_flashdata('warning', 'Impossible de supprimer l\'article #' . $id . ' car il n\'existe pas ou n\'a jamais existé');
+				// Vérification de l'article à supprimer
+				if ($article->num_rows() == 1) {
+					$this->session->set_flashdata('success', 'Article "' . $article->row()->title . '" supprimé');
+					// Suppression de l'article
+					$this->Model_articles->delete($id);
+				} else {
+					$this->session->set_flashdata('warning', 'Impossible de supprimer l\'article #' . $id . ' car il n\'existe pas ou n\'a jamais existé');
+				}
 			}
 
 			redirect(base_url($this->url));

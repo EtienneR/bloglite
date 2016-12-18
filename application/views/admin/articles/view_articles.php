@@ -9,9 +9,7 @@
 	<?php if (isset($_GET['tag'])) :?>
 		<a class="btn btn-default" href="<?= base_url('admin') ?>">Tous les articles</a>
 	<?php endif; ?>
-
 	<?php endif; ?>
-
 </p>
 
 <?php if (isset($articles) && $articles->num_rows() > 0): ?>
@@ -52,8 +50,7 @@
 		<td>
 			<?= date_fr(nice_date($article->cdate, 'd'), nice_date($article->cdate, 'm'), nice_date($article->cdate, 'Y'), nice_date($article->cdate, 'H'), nice_date($article->cdate, 'i')) ?>
 		</td>
-		
-			<?php if ( $article->pdate > unix_to_human(now(), TRUE, 'eu')): ?>
+			<?php if ($article->pdate >= date(DATE_ISO8601, time())): ?>
 				<td class="alert-warning">
 			<?php else: ?>
 				<td class="alert-success">
@@ -79,9 +76,11 @@
 			</a>
 		</td>
 		<td class="text-center">
+			<?php if ($connected['level'] == 0 || ($article->userId == $connected['id'])): ?>
 			<a href="<?= base_url('admin/articles/delete/' . $article->articleId) ?>" title="Supprimer cet article" onclick="confirmDelete()">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
+			<?php endif; ?>
 		</td>
 	</tr>
 	<?php endforeach; ?>
