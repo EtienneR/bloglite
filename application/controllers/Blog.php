@@ -92,7 +92,7 @@ class Blog extends CI_Controller {
 		$data['description'] = $this->title_page . ' - Archives';
 		$data['tags_list']   = $this->tags->tagsList();
 
-		$data['articles'] = $this->Model_articles->findAll('','', TRUE);
+		$data['articles'] = $this->Model_articles->findAll('','', TRUE, TRUE);
 
 		// Affichage de la vue + données
 		$this->template->load('front/view_layout', 'front/view_archives', $data);
@@ -107,13 +107,23 @@ class Blog extends CI_Controller {
 		// Vérification de l'existence de l'article
 		if ($article->num_rows() == 1) {
 
-			if ($article->row()->state == 0) {
+			// En brouillon
+			if ($article->row()->state == 0 || $article->row()->pdate > date(DATE_ISO8601, time())) {
 				$this->load->library(array('functions', 'session'));
+
 				if ($this->functions->getLoged()) {
-					// Seulement pour le dashboard
-					$data['draft'] = TRUE;
+
+					// Brouillon
+					if ($article->row()->state == 0) {
+						$data['message206'] = 'Cet article n\'est pas publié sur votre site, la page retourne ainsi une erreur HTTP 206.';
+					  // Publié mais dans le futur...
+					} else if ($article->row()->pdate > date(DATE_ISO8601, time())) {
+						$data['message206'] = 'Cet article n\'est pas encore publié sur votre site, la page retourne ainsi une erreur HTTP 206.';
+					}
+
 					header('HTTP/1.1 206 Partial Content');
 				}
+
 			}
 
 			$data['name_site']  = $this->title_page;

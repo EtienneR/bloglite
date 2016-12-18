@@ -1,6 +1,6 @@
-<?php if (isset($draft)): ?>
+<?php if (isset($message206)): ?>
 <div class="callout warning">
-  Cet article n'est pas publié sur votre site, la page retourne ainsi une erreur HTTP 206.
+	<?= $message206?>
 </div>
 <?php endif; ?>
 
