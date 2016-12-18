@@ -192,7 +192,7 @@ class Blog extends CI_Controller {
 		$data['encoding']		  = 'utf-8';
 		$data['feed_url']		  = base_url() . '/feed';
 		$data['page_language']	  = 'fr-fr';
-		$data['articles']		  = $this->Model_articles->findAll();
+		$data['articles']		  = $this->Model_articles->findAll('', '', '', TRUE);
 
 		$this->load->view('front/view_feed', $data);
 	}
