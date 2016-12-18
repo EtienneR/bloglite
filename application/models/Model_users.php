@@ -32,6 +32,7 @@ class Model_users extends CI_Model {
 		$this->db->select('userId, name, password, email, level')
 				 ->from($this->table)
 				 ->where('name', $name)
+				 ->or_where('email', $name)
 				 ->limit(1);
 
 		return $this->db->get();

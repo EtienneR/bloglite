@@ -70,6 +70,6 @@ Par défaut, l'API n'est pas publique (il faut être connecté au back office). 
 
 - Traduire les messages d'erreurs en français ;
 - Message de confirmation de suppression (JS) ;
-~~- Ajouter une entité pour la date de publication ;~~
-~~- Empêcher le modérateur de supprimer les autres articles ;~~
-- S'authentifier avec login OU email.
+- ~~Ajouter une entité pour la date de publication~~ ;
+- ~~Empêcher le modérateur de supprimer les autres articles~~ ;
+- ~~S'authentifier avec login OU email~~.
