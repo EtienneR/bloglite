@@ -62,7 +62,7 @@ Par défaut, l'API n'est pas publique (il faut être connecté au back office). 
     - réglage de la pagination (nombre d'articles par page) ;
     - description du site ;
     - slug reservés ;
-- L'utilisateur peut éditer son profile et réinitialiser son mot de passe ;
+- L'utilisateur peut éditer son profil et réinitialiser son mot de passe ;
 
 ## Todolist
 
@@ -70,6 +70,6 @@ Par défaut, l'API n'est pas publique (il faut être connecté au back office). 
 
 - Traduire les messages d'erreurs en français ;
 - Message de confirmation de suppression (JS) ;
-- Ajouter une entité pour la date de publication ;
+- ~~Ajouter une entité pour la date de publication~~ ;
 - Empêcher le modérateur de supprimer les autres articles ;
 - S'authentifier avec login OU email.
