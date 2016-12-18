@@ -207,10 +207,12 @@ class Articles extends CI_Controller {
 							'value' => isset($data['content'])?$data['content']:set_value('content'));
 
 			$data['tags'] = array(
-							'class' => 'form-control',
-							'name'  => 'tags',
-							'id'    => 'tags',
-							'value' => isset($data['tags'])?$data['tags']:set_value('tags'));
+							'class'    => 'form-control flexdatalist',
+							'name'     => 'tags',
+							'id'       => 'tags',
+							'list'     => 'tagsList',
+							'multiple' => 'multiple',
+							'value'    => isset($data['tags'])?$data['tags']:set_value('tags'));
 
 			$data['demo'] = array(
 							'class' => 'form-control',

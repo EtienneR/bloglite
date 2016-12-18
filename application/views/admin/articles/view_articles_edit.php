@@ -1,4 +1,5 @@
 <?= form_open() ?>
+
 	<?= validation_errors('<div class="alert alert-warning" role="alert">', '</div>') ?>
 
 	<!-- Date de planification -->
@@ -65,6 +66,12 @@
 					<?= form_input($tags); ?>
 				</div>
 
+				<datalist id="languages">
+					<?php foreach (array_unique($tagInArray) as $tag): ?>
+						<option value="<?= $tag ?>"><?= $tag; ?></option>
+					<?php endforeach; ?>
+				</datalist>
+
 				<?php if (isset($id)): ?>
 				<div class="form-group col-md-4">
 					<?= form_label('Slug', 'slug'); ?>
@@ -119,7 +126,7 @@ flatpickr(".flatpickr", {
 	}
 });
 
-$('#tags').tokenfield({
+/*$('#tags').tokenfield({
   autocomplete: {
     source: [<?php sort($tagInArray); foreach (array_unique($tagInArray) as $row) {
 				if ($row === end($tagInArray)) {
@@ -131,5 +138,9 @@ $('#tags').tokenfield({
     delay: 0
   },
   showAutocompleteOnFocus: true
+});
+*/
+$('.flexdatalist').flexdatalist({
+     minLength: 1
 });
 </script>

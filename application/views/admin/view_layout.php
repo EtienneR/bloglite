@@ -14,6 +14,7 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<?= js_url('bootstrap.min') ?>
 	<?= js_url('bootstrap-tokenfield.min') ?>
+	<?= css_url('jquery.flexdatalist.min') ?>
 
 	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
 	<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
@@ -105,6 +106,7 @@
 
 	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
 	<?= js_url('simplemde.min') ?>
+	<?= js_url('jquery.flexdatalist.min') ?>
 	<script>
 	var simplemde = new SimpleMDE({ element: document.getElementById("content") });
 	</script>
