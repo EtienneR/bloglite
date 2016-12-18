@@ -13,6 +13,7 @@ CREATE TABLE articles(
 	content TEXT NOT NULL, 
 	slug TEXT UNIQUE NOT NULL, 
 	cdate TEXT NOT NULL, 
+	pdate TEXT NOT NULL, 
 	state INTEGER NOT NULL, 
 	tags TEXT,
 	type TEXT,

@@ -57,7 +57,7 @@ class Blog extends CI_Controller {
 
 				$data['articles'] = $this->Model_articles->search($search, $currentPage, $config['per_page'])->result();
 			} else {
-				$data['articles'] = $this->Model_articles->findAll($currentPage, $config['per_page'], TRUE)->result();
+				$data['articles'] = $this->Model_articles->findAll($currentPage, $config['per_page'], TRUE, TRUE)->result();
 			}
 		}
 
@@ -124,7 +124,7 @@ class Blog extends CI_Controller {
 			$data['content']	 = $article->row()->content;
 			$data['description'] = strip_tags(character_limiter($this->markdown->parse($data['content']), 256));
 			$data['tags']		 = $article->row()->tags;
-			$data['cdate']		 = $article->row()->cdate;
+			$data['pdate']		 = $article->row()->pdate;
 			$data['type']		 = $article->row()->type;
 			$data['demo']		 = $article->row()->demo;
 			$data['download']	 = $article->row()->download;

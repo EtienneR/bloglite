@@ -21,6 +21,8 @@
 		<th>Titre</th>
 		<th>Contenu</th>
 		<th>Statut</th>
+		<th>Création</th>
+		<th>Publication</th>
 		<th>Tags</th>
 		<th>Auteur</th>
 		<th></th>
@@ -46,6 +48,17 @@
 				<span class="label label-info">Publié</span>
 			</a>
 			<?php endif; ?>
+		</td>
+		<td>
+			<?= date_fr(nice_date($article->cdate, 'd'), nice_date($article->cdate, 'm'), nice_date($article->cdate, 'Y'), nice_date($article->cdate, 'H'), nice_date($article->cdate, 'i')) ?>
+		</td>
+		
+			<?php if ( $article->pdate > unix_to_human(now(), TRUE, 'eu')): ?>
+				<td class="alert-warning">
+			<?php else: ?>
+				<td class="alert-success">
+			<?php endif; ?>
+			<?= date_fr(nice_date($article->pdate, 'd'), nice_date($article->pdate, 'm'), nice_date($article->pdate, 'Y'), nice_date($article->pdate, 'H'), nice_date($article->pdate, 'i')) ?>
 		</td>
 		<td>
 			<?= getTags($article->tags, 'admin') ?>

@@ -78,6 +78,7 @@ class Articles extends CI_Controller {
 			// Stockage des valeurs
 			$title	  = $this->input->post('title');
 			$content  = $this->input->post('content');
+			$pdate	  = $this->input->post('pdate');
 			$state	  = $this->input->post('state');
 			$tags	  = $this->input->post('tags');
 			$demo	  = $this->input->post('demo');
@@ -100,6 +101,7 @@ class Articles extends CI_Controller {
 					$data['slug']		= $article->row()->slug;
 					$data['state']		= $article->row()->state;
 					$data['cdate']		= $article->row()->cdate;
+					$data['pdate']		= $article->row()->pdate;
 					$data['tags']		= $article->row()->tags;
 					$data['demo']		= $article->row()->demo;
 					$data['download']	= $article->row()->download;
@@ -125,11 +127,17 @@ class Articles extends CI_Controller {
 					if ($this->form_validation->run() !== FALSE) {
 						$tags = str_replace(' ', '', $tags);
 
-						if ($title == $data['title'] && $content == $data['content'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
+						if ($pdate) {
+							$pdate = date(DATE_ISO8601, intval($pdate));
+						} else {
+							$pdate = $data['pdate'];
+						}
+
+						if ($title == $data['title'] && $content == $data['content'] && $pdate == $data['pdate'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
 							$this->session->set_flashdata('warning', 'Aucune modification à prendre en compte.');
 						} else {
 							// Modification en BDD
-							$this->Model_articles->update($title, $content, $state, $tags, $demo, $download, $id);
+							$this->Model_articles->update($title, $content, $pdate, $state, $tags, $demo, $download, $id);
 							$this->session->set_flashdata('success', 'Article "' . $title . '" modifié.');
 						}
 
@@ -168,10 +176,17 @@ class Articles extends CI_Controller {
 					} elseif ($check_slug->num_rows() == 1) {
 						$this->session->set_flashdata('warning', 'Le slug "' . $slug . '" est déjà utilisé. Merci de changer le titre de cet article.');
 					} else {
-						// Création de la date du post
-						$cdate = date(DATE_ISO8601, time());
 
-						$this->Model_articles->insert($title, $content, $state, $slug, $cdate, $tags, $demo, $download, $data['connected']['id']);
+						// Gestion date de publication et date de création
+						if (empty($pdate)) {
+							$pdate = $cdate = date(DATE_ISO8601, time());
+						} else {
+							$pdate = intval($pdate);
+							$pdate = date(DATE_ISO8601, $pdate);
+							$cdate = date(DATE_ISO8601, time());
+						}
+
+						$this->Model_articles->insert($title, $content, $state, $slug, $cdate, $pdate, $tags, $demo, $download, $data['connected']['id']);
 						$this->session->set_flashdata('success', 'Article "' . $title . '" créé.');
 						redirect(base_url($this->url));
 					}
@@ -208,6 +223,12 @@ class Articles extends CI_Controller {
 							'name'  => 'download',
 							'id'    => 'download',
 							'value' => isset($data['download'])?$data['download']:set_value('download'));
+
+			$data['pdate'] = array(
+							'class' => 'flatpickr form-control',
+							'name'  => 'pdate2',
+							'id'    => 'pdate2',
+							'value' => isset($data['pdate'])?$data['pdate']:set_value('pdate'));
 
 			$data['submit'] = array(
 							'class' => 'btn btn-primary',

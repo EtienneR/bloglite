@@ -9,15 +9,20 @@ class Model_articles extends CI_Model {
 	}
 
 	// Tous les articles
-	function findAll($currentPage = '', $perPage = '', $strict = '')
+	function findAll($currentPage = '', $perPage = '', $strict = '', $published = '')
 	{
-		$this->db->select('articleId, title, content, slug, cdate, state, tags, users.userId, users.name')
+		$this->db->select('articleId, title, content, slug, cdate, pdate, state, tags, users.userId, users.name')
 				 ->from($this->table)
 				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId');
 
 		if ($strict && $strict == TRUE) {
 			$this->db->where('state', 1);
+		}
+
+		if ($published && $published == TRUE) {
+			// Afficher les articles non publiés
+			$this->db->where('pdate <=', unix_to_human(now(), TRUE, 'eu') );
 		}
 
 		$this->db->order_by('articleId', 'desc');
@@ -34,7 +39,7 @@ class Model_articles extends CI_Model {
 	// Un article
 	function find($id)
 	{
-		$this->db->select('articleId, title, content, slug, cdate, state, tags, demo, download, users.userId, users.name')
+		$this->db->select('articleId, title, content, slug, cdate, pdate, state, tags, demo, download, users.userId, users.name')
 				 ->from($this->table)
 				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
@@ -187,7 +192,7 @@ class Model_articles extends CI_Model {
 
 
 	// Insertion d'un article
-	function insert($title, $content, $state, $slug, $cdate, $tags, $demo, $download, $user_id)
+	function insert($title, $content, $state, $slug, $cdate, $pdate, $tags, $demo, $download, $user_id)
 	{
 		$data = array(
 			'title'    => $title,
@@ -195,6 +200,7 @@ class Model_articles extends CI_Model {
 			'state'	   => $state,
 			'slug'     => $slug,
 			'cdate'    => $cdate,
+			'pdate'    => $pdate,
 			'tags'     => $tags,
 			'type'     => 'article',
 			'demo'     => $demo,
@@ -216,11 +222,12 @@ class Model_articles extends CI_Model {
 	}
 
 	// Modification d'un article
-	function update($title, $content, $state, $tags, $demo, $download, $id)
+	function update($title, $content, $pdate, $state, $tags, $demo, $download, $id)
 	{
 		$data = array(
 			'title'    => $title,
 			'content'  => $content,
+			'pdate'    => $pdate,
 			'state'	   => $state,
 			'tags'	   => $tags,
 			'demo'	   => $demo,

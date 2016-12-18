@@ -15,7 +15,7 @@
 	<?php endif; ?>
 	</div>
 	<?php if ($type == 'article'): ?>
-	<p><?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?></p>
+	<p><?= date_fr(nice_date($pdate, 'd'), nice_date($pdate, 'm'), nice_date($pdate, 'Y'), nice_date($pdate, 'H'), nice_date($pdate, 'i')) ?></p>
 	<?php endif; ?>
 	<?= getTags($tags, 'article'); ?>
 	<?= $this->markdown->parse($content) ?>

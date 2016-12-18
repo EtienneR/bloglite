@@ -14,6 +14,12 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
 	<?= js_url('bootstrap.min') ?>
 	<?= js_url('bootstrap-tokenfield.min') ?>
+
+	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
+	<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
+	<script src="https://unpkg.com/flatpickr"></script>
+	<script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+	<?php endif; ?>
 </head>
 <body class="container-fluid">
 
