@@ -108,9 +108,31 @@
 	<?= js_url('simplemde.min') ?>
 	<?= js_url('jquery.flexdatalist.min') ?>
 	<script>
-	var simplemde = new SimpleMDE({ element: document.getElementById("content") });
+		var simplemde = new SimpleMDE({ 
+			element: document.getElementById('content') 
+		});
 	</script>
 	<?php endif; ?>
+	<script>
+		function deleteConfirm(type) {
+			if (type == 'article') {
+				var message = 'cet article';
+			} else if (type == 'page') {
+				var message = 'cette page';
+			} else if (type == 'user') {
+				var message = 'cet utilisateur';
+			}
+
+			if (message) {
+				var a = confirm('Etes-vous sur de vouloir supprimer ' + message + ' ?!');
+				if (a) {
+					return true;
+				} else{
+					return false;
+				}
+			}
+		}
+	</script>
 
 </body>
 </html>

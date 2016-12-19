@@ -77,7 +77,9 @@
 		</td>
 		<td class="text-center">
 			<?php if ($connected['level'] == 0 || ($article->userId == $connected['id'])): ?>
-			<a href="<?= base_url('admin/articles/delete/' . $article->articleId) ?>" title="Supprimer cet article" onclick="confirmDelete()">
+			<a href="<?= base_url('admin/articles/delete/' . $article->articleId) ?>" 
+			   title="Supprimer cet article" 
+			   onclick="return deleteConfirm('article')">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 			<?php endif; ?>

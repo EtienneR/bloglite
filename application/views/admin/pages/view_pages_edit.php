@@ -7,9 +7,10 @@
 		<div class="col-md-6">
 			<div class="text-right">
 				<i class="glyphicon glyphicon-calendar"></i> Rédigé <?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?>
-				<a href="<?= base_url('admin/articles/delete/' . $id) ?>">
-				<span class="btn btn-warning">
-					<i class="glyphicon glyphicon-trash"></i> Supprimer cet article
+				<a href="<?= base_url('admin/articles/delete/' . $id) ?>"
+				   onclick="return deleteConfirm('page')">
+					<span class="btn btn-warning">
+						<i class="glyphicon glyphicon-trash"></i> Supprimer cette page
 					</span>
 				</a>
 			</div>

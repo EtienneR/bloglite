@@ -36,7 +36,9 @@
 			</a>
 		</td>
 		<td class="text-center">
-			<a href="<?= base_url('admin/users/delete/' . $user->userId) ?>" title="Supprimer cet utilisateur">
+			<a href="<?= base_url('admin/users/delete/' . $user->userId) ?>" 
+			   title="Supprimer cet utilisateur"
+			   onclick="return deleteConfirm('user')">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</td>

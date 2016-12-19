@@ -50,7 +50,9 @@
 			</a>
 		</td>
 		<td class="text-center">
-			<a href="<?= base_url('admin/pages/delete/' . $page->articleId) ?>" title="Supprimer cet article">
+			<a href="<?= base_url('admin/pages/delete/' . $page->articleId) ?>" 
+			   title="Supprimer cet article"
+			   onclick="return deleteConfirm('page')">
 				<i class="glyphicon glyphicon-trash"></i>
 			</a>
 		</td>
