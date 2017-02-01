@@ -39,7 +39,7 @@ class Model_articles extends CI_Model {
 	// Un article
 	function find($id)
 	{
-		$this->db->select('articleId, title, content, slug, cdate, pdate, state, tags, demo, download, users.userId, users.name')
+		$this->db->select('articleId, title, content, slug, cdate, udate, pdate, state, tags, demo, download, users.userId, users.name')
 				 ->from($this->table)
 				 ->where('type', 'article')
 				 ->join('users', 'users.userId = ' . $this->table . '.userId')
@@ -195,14 +195,16 @@ class Model_articles extends CI_Model {
 
 
 	// Insertion d'un article
-	function insert($title, $content, $state, $slug, $cdate, $pdate, $tags, $demo, $download, $user_id)
+	function insert($title, $content, $state, $slug, $pdate, $tags, $demo, $download, $user_id)
 	{
+		$date = date(DATE_ISO8601, time());
 		$data = array(
 			'title'    => $title,
 			'content'  => $content,
 			'state'	   => $state,
 			'slug'     => $slug,
-			'cdate'    => $cdate,
+			'cdate'    => $date,
+			'udate'    => $date,
 			'pdate'    => $pdate,
 			'tags'     => $tags,
 			'type'     => 'article',
@@ -215,23 +217,27 @@ class Model_articles extends CI_Model {
 	}
 
 	// Vérification de l'existence d'un slug
-	function checkSlug($slug)
+	function checkSlug($slug, $id)
 	{
 		$this->db->select('slug')
 				 ->from($this->table)
-				 ->where('slug', $slug);
+				 ->where('slug', $slug)
+				 ->where('articleId <>', $id);
 
 		return $this->db->get();
 	}
 
 	// Modification d'un article
-	function update($title, $content, $pdate, $state, $tags, $demo, $download, $id)
+	function update($title, $content, $pdate, $state, $slug, $tags, $demo, $download, $id)
 	{
+		$date = date(DATE_ISO8601, time());
 		$data = array(
 			'title'    => $title,
 			'content'  => $content,
+			'udate'    => $date,
 			'pdate'    => $pdate,
 			'state'	   => $state,
+			'slug'	   => $slug,
 			'tags'	   => $tags,
 			'demo'	   => $demo,
 			'download' => $download

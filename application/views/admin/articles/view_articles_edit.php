@@ -29,6 +29,10 @@
 		<?php if (isset($id)): ?>
 			<div class="text-right">
 				<i class="glyphicon glyphicon-calendar"></i> Rédigé <?= date_fr(nice_date($cdate, 'd'), nice_date($cdate, 'm'), nice_date($cdate, 'Y'), nice_date($cdate, 'H'), nice_date($cdate, 'i')) ?>
+
+				<?php if ($cdate !== $udate): ?>
+				<i class="glyphicon glyphicon-calendar"></i> Dernière modification <?= date_fr(nice_date($udate, 'd'), nice_date($udate, 'm'), nice_date($udate, 'Y'), nice_date($udate, 'H'), nice_date($udate, 'i')) ?>
+				<?php endif; ?>
 				<a href="<?= base_url('admin/articles/delete/' . $id) ?>"
 				   onclick="return deleteConfirm('article')">
 					<span class="btn btn-warning">

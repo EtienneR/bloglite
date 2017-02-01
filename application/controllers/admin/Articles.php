@@ -79,6 +79,7 @@ class Articles extends CI_Controller {
 			$title	  = $this->input->post('title');
 			$content  = $this->input->post('content');
 			$pdate	  = $this->input->post('pdate');
+			$slug	  = $this->input->post('slug');
 			$state	  = $this->input->post('state');
 			$tags	  = $this->input->post('tags');
 			$demo	  = $this->input->post('demo');
@@ -101,6 +102,7 @@ class Articles extends CI_Controller {
 					$data['slug']		= $article->row()->slug;
 					$data['state']		= $article->row()->state;
 					$data['cdate']		= $article->row()->cdate;
+					$data['udate']		= $article->row()->udate;
 					$data['pdate']		= $article->row()->pdate;
 					$data['tags']		= $article->row()->tags;
 					$data['demo']		= $article->row()->demo;
@@ -119,7 +121,7 @@ class Articles extends CI_Controller {
 					}
 
 					$this->form_validation->set_rules('title', 'Title', 'required|trim|min_length[2]' . $unique_title);
-					$this->form_validation->set_rules('slug', 'slug', 'required|trim|min_length[2]|is_unique[articles.title]|callback__reservedSlug');
+					$this->form_validation->set_rules('slug', 'slug', 'required|trim|min_length[2]|callback__reservedSlug');
 					$this->form_validation->set_rules('demo', 'demo', 'trim');
 					$this->form_validation->set_rules('download', 'download', 'trim');
 
@@ -133,11 +135,11 @@ class Articles extends CI_Controller {
 							$pdate = $data['pdate'];
 						}
 
-						if ($title == $data['title'] && $content == $data['content'] && $pdate == $data['pdate'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
+						if ($title == $data['title'] && $content == $data['content'] && $pdate == $data['pdate'] && $slug == $data['slug'] && $state == $data['state'] && $tags == $data['tags'] && $demo == $data['demo'] && $download == $data['download']) {
 							$this->session->set_flashdata('warning', 'Aucune modification à prendre en compte.');
 						} else {
 							// Modification en BDD
-							$this->Model_articles->update($title, $content, $pdate, $state, $tags, $demo, $download, $id);
+							$this->Model_articles->update($title, $content, $pdate, $state, $slug, $tags, $demo, $download, $id);
 							$this->session->set_flashdata('success', 'Article "' . $title . '" modifié.');
 						}
 
@@ -169,7 +171,7 @@ class Articles extends CI_Controller {
 					$slug = url_title(convert_accented_characters($title), '-', TRUE);
 
 					// Vérification de l'existence d'un slug
-					$check_slug = $this->Model_articles->checkSlug($slug);
+					$check_slug = $this->Model_articles->checkSlug($slug, '');
 
 					if (in_array(strtolower($slug), $slugs_reserved)) {
 						$this->session->set_flashdata('warning', 'Le slug "' . $slug . '" est réservé. Merci de changer le titre de cet article.');
@@ -177,16 +179,17 @@ class Articles extends CI_Controller {
 						$this->session->set_flashdata('warning', 'Le slug "' . $slug . '" est déjà utilisé. Merci de changer le titre de cet article.');
 					} else {
 
-						// Gestion date de publication et date de création
+						// Gestion date de publication
 						if (empty($pdate)) {
-							$pdate = $cdate = date(DATE_ISO8601, time());
+							echo "viiiide";
+							$pdate = date(DATE_ISO8601, time());
 						} else {
 							$pdate = intval($pdate);
 							$pdate = date(DATE_ISO8601, $pdate);
-							$cdate = date(DATE_ISO8601, time());
 						}
 
-						$this->Model_articles->insert($title, $content, $state, $slug, $cdate, $pdate, $tags, $demo, $download, $data['connected']['id']);
+						$this->Model_articles->insert($title, $content, $state, $slug, $pdate, $tags, $demo, $download, $data['connected']['id']);
+
 						$this->session->set_flashdata('success', 'Article "' . $title . '" créé.');
 						redirect(base_url($this->url));
 					}
@@ -245,7 +248,9 @@ class Articles extends CI_Controller {
 	// Callback des slugs réservés
 	function _reservedSlug($slug)
 	{
-		if (in_array(strtolower($slug), $this->reserved_slugs)) {
+		$id = $this->uri->segment(4);
+		//if (in_array(strtolower($slug), $this->reserved_slugs)) {
+		if ($this->Model_articles->checkSlug($slug, $id)->num_rows() == 1) {
 			$this->form_validation->set_message('_reservedSlug', 'Le slug "' . $slug . '" est déja réservé.');
 			return FALSE;
 		} else {
@@ -276,7 +281,7 @@ class Articles extends CI_Controller {
 		}
 	}
 
-	// Les articles de tel utilisateur
+	// Les articles d'un utilisateur
 	public function user($id)
 	{
 		if ($this->functions->getLoged()) {
