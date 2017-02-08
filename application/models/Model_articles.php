@@ -90,7 +90,8 @@ class Model_articles extends CI_Model {
 				 ->from($this->table)
 				 ->like('tags', $tag)
 				 ->where('state', 1)
-				 ->where('pdate <=', date(DATE_ISO8601, time()));
+				 ->where('pdate <=', date(DATE_ISO8601, time()))
+				 ->order_by('pdate', 'DESC');
 
 		if ($currentPage && $perPage) {
 			$this->db->limit($perPage, ($currentPage-1) * $perPage);
