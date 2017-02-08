@@ -7,10 +7,10 @@
 <article>
 	<h1 class="text-center"><?= $title ?></h1>
 	<div class="text-center">
-	<?php if (isset($demo)): ?>
+	<?php if (!empty($demo)): ?>
 		<a href="<?= $demo ?>" target="_blank" class="success button">Démo</a>
 	<?php endif; ?>
-	<?php if (isset($download)): ?>
+	<?php if (!empty($download)): ?>
 		<a href="<?= $download ?>" target="_blank" class="button">Télécharger</a>
 	<?php endif; ?>
 	</div>
