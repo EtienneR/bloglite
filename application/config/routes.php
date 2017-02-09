@@ -47,8 +47,8 @@ $route['archives'] = $route['default_controller'] . '/archives';
 $route['contact'] = 'contact';
 
 ## Tags
-$route['tag/(:any)']			 = $route['default_controller'] . '/tag/$1';
-$route['tag/(:any)/page/(:num)'] = $route['default_controller'] . '/tag/$1/$2';
+$route['tag/([a-z]+)']			 = $route['default_controller'] . '/tag/$1';
+$route['tag/([a-z]+)/page/(:num)'] = $route['default_controller'] . '/tag/$1/$2';
 
 ## Pagination
 $route['page/(:num)'] = $route['default_controller'] . '/index/$1';
