@@ -39,9 +39,9 @@ class Blog extends CI_Controller {
 				$config['query_string_segment'] = 'page';
 				$config['base_url']				= '?q=' . $search;
 				// Mise en page de la pagination
-				$config = pagination_custom($articles->num_rows(), '?q=' . $search, '',  true);
+				$config = pagination_custom($articles->num_rows(), '?q=' . $search, '', TRUE, TRUE);
 			} else {
-				$config = pagination_custom($articles->num_rows(), base_url('page'), base_url(), false);
+				$config = pagination_custom($articles->num_rows(), base_url('page'), base_url(), FALSE);
 			}
 
 			// Initialisation de la pagination
