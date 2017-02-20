@@ -24,6 +24,10 @@ class Blog extends CI_Controller {
 		// Recherche
 		if (isset($search) && $search) {
 			$articles = $this->Model_articles->search($search);
+
+			$this->load->model('Model_search');
+			// Insertion dans la table du mot recherché
+			$this->Model_search->insert($search, $articles->num_rows());
 		} else {
 			$articles = $this->Model_articles->findAll('','', TRUE);
 		}

@@ -30,6 +30,10 @@ $route['admin/pages/edit']		    = 'admin/pages/edit';
 $route['admin/pages/edit/(:any)']   = 'admin/pages/edit/$1';
 $route['admin/pages/delete/(:num)'] = 'admin/pages/delete/$1';
 
+## Mot recherchés
+$route['admin/search']			   = 'admin/search';
+$route['admin/search/occurrences'] = 'admin/search/occurrences';
+
 ## Config
 $route['admin/config'] = 'admin/config';
 $route['admin/about']  = 'admin/config/about';

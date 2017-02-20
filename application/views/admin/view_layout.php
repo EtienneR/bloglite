@@ -55,7 +55,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<?= base_url() ?>" target="_blank">Le blog</a></li>
 					<?php if (isset($connected)): ?>
-					<?php if ($connected['level'] == 0): ?>
+<!-- 					<?php if ($connected['level'] == 0): ?>
 					<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'config'): ?>class="active"<?php endif; ?>>
 						<a href="<?= base_url('admin/config') ?>">Config</a>
 					</li>
@@ -65,7 +65,37 @@
 					</li>
 					<li>
 						<a href="<?= base_url('admin/logout') ?>">Logout</a>
+					</li> -->
+
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $connected['username'] ?> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<?php if ($connected['level'] == 0): ?>
+							<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'config'): ?>class="active"<?php endif; ?>>
+								<a href="<?= base_url('admin/config') ?>">
+									<i class="glyphicon glyphicon-cog"></i> Paramêtres
+								</a>
+							</li>
+							<?php endif; ?>
+							<li <?php if ($this->uri->total_segments() == 4 && $this->uri->segments['4'] == $connected['id']): ?>class="active"<?php endif; ?>>
+								<a href="<?= base_url('admin/users/edit/' . $connected['id']) ?>">
+									<i class="glyphicon glyphicon glyphicon-user"></i> Profil
+								</a>
+							</li>
+							<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'search'):?>class="active"<?php endif; ?>>
+								<a href="<?= base_url('admin/search') ?>">
+									<i class="glyphicon glyphicon-search"></i> Mots recherches
+								</a>
+							</li>
+							<li>
+								<a href="<?= base_url('admin/logout') ?>">
+									<i class="glyphicon glyphicon-off"></i> Déconnexion
+								</a>
+							</li>
+						</ul><!-- end .dropdown-menu -->
 					</li>
+
+
 					<?php endif; ?>
 				</ul>
 			</div><!-- /.navbar-collapse -->
