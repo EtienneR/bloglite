@@ -23,6 +23,7 @@ class Blog extends CI_Controller {
 
 		// Recherche
 		if (isset($search) && $search) {
+			$data['search'] = $search;
 			$articles = $this->Model_articles->search($search);
 
 			$this->load->model('Model_search');

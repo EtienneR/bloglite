@@ -39,6 +39,11 @@
 		</div>
 
 		<asside class="large-2 columns">
+
+			<form action="<?= base_url(); ?>" method="GET">
+				<input type="search" name="q" placeholder="Rechercher" value="<?php if(isset($search)) echo $search ; ?>">
+			</form>
+
 			<?php if (isset($tags_list)): ?>
 				<div class="menu-centered">
 			<ul class="menu vertical">
