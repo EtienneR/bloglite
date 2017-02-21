@@ -19,6 +19,10 @@ class Blog extends CI_Controller {
 		// Chargement de la librairie de pagination
 		$this->load->library('pagination');
 
+		if ($currentPage == 1) {
+			redirect('/', 'location', 301);
+		}
+
 		$search	= htmlspecialchars($this->input->get('q'));		// <script>alert('coucou')<script>
 
 		// Recherche
@@ -53,15 +57,26 @@ class Blog extends CI_Controller {
 			$this->pagination->initialize($config);
 			$data['pagination'] = $this->pagination->create_links();
 
+			$pageMax = ceil($articles->num_rows() / $config['per_page']);
+
 			// Chargement des données
 			if (isset($search) && $search) {
 
 				if (isset($_GET['page'])) {
 					$currentPage = $_GET['page'];
+
+					if ($_GET['page'] == 1) {
+						redirect('/', 'location', 301);
+					}
+
 				}
+
+				$this->_checkPaginationLimit($currentPage, $pageMax, base_url('?q='.$search));
 
 				$data['articles'] = $this->Model_articles->search($search, $currentPage, $config['per_page'])->result();
 			} else {
+				$this->_checkPaginationLimit($currentPage, $pageMax, base_url());
+
 				$data['articles'] = $this->Model_articles->findAll($currentPage, $config['per_page'], TRUE, TRUE)->result();
 			}
 		}
@@ -87,6 +102,14 @@ class Blog extends CI_Controller {
 
 		// Affichage de la vue + données
 		$this->template->load('front/view_layout', 'front/view_listing', $data);
+	}
+
+	// Limitations de la pagination
+	private function _checkPaginationLimit($page, $limit, $url)
+	{
+		if (isset($page) && $page > $limit) {
+			redirect($url);
+		}
 	}
 
 	// Archives
