@@ -46,14 +46,14 @@ class Model_pages extends CI_Model {
 
 
 	// Insertion d'une page
-	function insert($title, $content, $state, $slug, $cdate,$user_id)
+	function insert($title, $content, $state, $slug, $tags, $user_id)
 	{
 		$data = array(
 			'title'   => $title,
 			'content' => $content,
 			'state'	  => $state,
 			'slug'    => $slug,
-			'cdate'   => $cdate,
+			'cdate'   => date(DATE_ISO8601, time()),
 			'tags'    => $tags,
 			'type'    => 'page',
 			'userId'  => $user_id
@@ -62,7 +62,7 @@ class Model_pages extends CI_Model {
 		$this->db->insert($this->table, $data);
 	}
 
-	// Modification d'un article
+	// Modification d'une page
 	function update($title, $content, $state, $tags, $id)
 	{
 		$data = array(
