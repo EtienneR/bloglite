@@ -119,7 +119,7 @@
 Flatpickr.localize(Flatpickr.l10ns.fr);
 flatpickr(".flatpickr", {
 	utc: true,
-	dateFormat: 'm/d/Y H:m:S',
+	dateFormat: 'm/d/Y H:i:S',
 	enableTime: true,
 	time_24hr: true,
 	onClose: function(selectedDates, dateStr, instance) {
@@ -131,20 +131,6 @@ flatpickr(".flatpickr", {
 	}
 });
 
-/*$('#tags').tokenfield({
-  autocomplete: {
-    source: [<?php sort($tagInArray); foreach (array_unique($tagInArray) as $row) {
-				if ($row === end($tagInArray)) {
-					echo "'" . $row . "'";
-				} else {
-					echo "'" . $row . "',";
-				}
-			} ?>],
-    delay: 0
-  },
-  showAutocompleteOnFocus: true
-});
-*/
 $('.flexdatalist').flexdatalist({
      minLength: 1
 });
