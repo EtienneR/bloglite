@@ -4,22 +4,12 @@
 	<meta charset="utf-8">
 	<title><?= $title_page ?> - Dashboard</title>
 	<?= css_url('bootstrap.min') ?>
-	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
-	<?= css_url('simplemde.min') ?>
-	<?php endif; ?>
-	<?= css_url('bootstrap-tokenfield.min') ?>
-	<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css" />
-
-	<?= js_url('jquery-2.2.0.min') ?>
-	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
-	<?= js_url('bootstrap.min') ?>
-	<?= js_url('bootstrap-tokenfield.min') ?>
-	<?= css_url('jquery.flexdatalist.min') ?>
-
-	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
-	<link rel="stylesheet" href="https://unpkg.com/flatpickr/dist/flatpickr.min.css">
-	<script src="https://unpkg.com/flatpickr"></script>
-	<script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+	<?php if ($this->uri->total_segments() >= 3 && ($this->uri->segments['2'] === 'articles' || $this->uri->segments['2'] === 'pages') && $this->uri->segments['3'] === 'edit'): ?>
+		<?= css_url('simplemde.min') ?>
+		<?= css_url('jquery-ui.min') ?>
+		<?= css_url('flatpickr.min') ?>
+		<?= js_url('flatpickr') ?>
+		<?= js_url('flatpickr_fr') ?>
 	<?php endif; ?>
 </head>
 <body class="container-fluid">
@@ -55,18 +45,6 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="<?= base_url() ?>" target="_blank">Le blog</a></li>
 					<?php if (isset($connected)): ?>
-<!-- 					<?php if ($connected['level'] == 0): ?>
-					<li <?php if ($this->uri->total_segments() >= 2 && $this->uri->segments['2'] === 'config'): ?>class="active"<?php endif; ?>>
-						<a href="<?= base_url('admin/config') ?>">Config</a>
-					</li>
-					<?php endif; ?>
-					<li <?php if ($this->uri->total_segments() == 4 && $this->uri->segments['4'] == $connected['id']): ?>class="active"<?php endif; ?>>
-						<a href="<?= base_url('admin/users/edit/' . $connected['id']) ?>"><?= $connected['username'] ?></a>
-					</li>
-					<li>
-						<a href="<?= base_url('admin/logout') ?>">Logout</a>
-					</li> -->
-
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?= $connected['username'] ?> <b class="caret"></b></a>
 						<ul class="dropdown-menu">
@@ -94,8 +72,6 @@
 							</li>
 						</ul><!-- end .dropdown-menu -->
 					</li>
-
-
 					<?php endif; ?>
 				</ul>
 			</div><!-- /.navbar-collapse -->
@@ -134,14 +110,18 @@
 	</footer>
 
 
-	<?php if ($this->uri->total_segments() >= 3 && $this->uri->segments['2'] === 'articles' && $this->uri->segments['3'] === 'edit'):?>
-	<?= js_url('simplemde.min') ?>
-	<?= js_url('jquery.flexdatalist.min') ?>
-	<script>
-		var simplemde = new SimpleMDE({ 
-			element: document.getElementById('content') 
-		});
-	</script>
+	<?= js_url('jquery-2.2.0.min') ?>
+	<?= js_url('bootstrap.min') ?>
+	<?php if ($this->uri->total_segments() >= 3 && ($this->uri->segments['2'] === 'articles' || $this->uri->segments['2'] === 'pages') && $this->uri->segments['3'] === 'edit'): ?>
+		<?= js_url('jquery-ui.min') ?>
+		<?= css_url('jquery.flexdatalist.min') ?>
+		<?= js_url('simplemde.min') ?>
+		<?= js_url('jquery.flexdatalist.min') ?>
+		<script>
+			var simplemde = new SimpleMDE({ 
+				element: document.getElementById('content')
+			});
+		</script>
 	<?php endif; ?>
 	<script>
 		function deleteConfirm(type) {
