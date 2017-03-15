@@ -59,15 +59,17 @@ class Articles extends CI_Controller {
 			// Récupération de la liste des tags
 			$tag_list = $this->Model_articles->getAllTags();
 
-			// Récupération des tags dans un tableau
-			foreach ($tag_list->result_array() as $row) {
-				$allTags[] = $row['tags'];
-			}
+			if ($tag_list->num_rows() > 0) {
+				// Récupération des tags dans un tableau
+				foreach ($tag_list->result_array() as $row) {
+					$allTags[] = $row['tags'];
+				}
 
-			// Récupération des tags séparés dans une chaine de caractères
-			$tagsInString = implode(',', $allTags);
-			// Récupération des tags séparés dans tableau
-			$data['tagInArray']  = explode(',', $tagsInString);
+				// Récupération des tags séparés dans une chaine de caractères
+				$tagsInString = implode(',', $allTags);
+				// Récupération des tags séparés dans tableau
+				$data['tagInArray']  = explode(',', $tagsInString);
+			}
 
 			// Règles de chaque champs
 			$this->form_validation->set_rules('content', 'Content', 'required|trim');
