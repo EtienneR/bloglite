@@ -18,6 +18,8 @@ CREATE TABLE articles(
 	state INTEGER NOT NULL, 
 	tags TEXT,
 	type TEXT,
+	demo TEXT,
+	download TEXT,
 	FOREIGN KEY(userId) REFERENCES users(userId)
 );
 
