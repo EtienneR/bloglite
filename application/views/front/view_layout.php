@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta description="<?= $description ?>" />
+	<meta name="description" content="<?= $description ?>">
 	<meta property="og:site_name" content="<?= $name_site ?>" /> 
 	<meta property="og:title" content="<?= $title_page ?>" /> 
 	<meta property="og:description" content="<?= $description ?>" /> 
