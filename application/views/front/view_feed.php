@@ -21,7 +21,7 @@
 			<description>
 				<?= xml_convert($this->markdown->parse($article->content)) ?>
 			</description>
-			<pubDate><?= $article->cdate ?></pubDate>
+			<pubDate><?= $article->pdate ?></pubDate>
 		</item>
 		<?php endforeach; ?>
 
